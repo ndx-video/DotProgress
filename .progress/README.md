@@ -94,7 +94,6 @@ See [M000.001.example-entry.md](M000.001.example-entry.md) for a filled-in examp
 | Document | Role |
 |----------|------|
 | [ROADMAP.md](../ROADMAP.md) | **What** to build, milestone gates *(optional)* |
-| [SITEMAP.md](../SITEMAP.md) | Where everything else lives |
 | `.progress/` | **Historical record** of what was done, when, and why |
 
 ## Finding the next index
