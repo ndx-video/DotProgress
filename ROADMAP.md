@@ -55,10 +55,10 @@ At the start of each milestone, bring into context:
 
 When work completes, append a progress file per [.progress/README.md](.progress/README.md):
 
-```
-{milestone}.{index}.{descriptor}.md
-```
+- **Milestone work:** `M000.002.adoption-docs.md` — `M` + three-digit milestone, three-digit per-milestone index
+- **General work:** `G000012.this-is-a-general-change.md` — `G` + six-digit global number
+- **Fixes:** `F000003.fix-login-redirect.md` — `F` + six-digit global number
 
-Example: `M000.002.adoption-docs.md` — milestone token zero-padded to three digits (`M0` → `M000`). Never edit prior progress files.
+Never edit prior progress files.
 
 **Plan here (ROADMAP). Record there (`.progress/`).**

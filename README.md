@@ -7,7 +7,7 @@ Super lightweight **context engineering**: an append-only progress log (`.progre
 | Piece | Purpose |
 |-------|---------|
 | [.progress/README.md](.progress/README.md) | The spec — naming, immutability, YAML frontmatter template |
-| [.progress/M000.\*.md](.progress/) | One file per meaningful session — what happened, what was decided |
+| [.progress/\*.md](.progress/) | One file per meaningful session — milestone (`M`), general (`G`), or fix (`F`) |
 | [ROADMAP.md](ROADMAP.md) | *(optional)* Example milestone plan scaffold |
 | [AGENTS.md](AGENTS.md) | Tells agents to implement `.progress/README.md` |
 
