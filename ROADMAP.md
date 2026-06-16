@@ -15,7 +15,7 @@ Lightweight milestone plan for **your project**. This file defines **what** to b
 **Done when:**
 - [README.md](README.md) explains what Dot Progress is and how to adopt it
 - [.progress/README.md](.progress/README.md) defines naming, immutability, and the YAML frontmatter template
-- At least one example entry exists under `.progress/` (e.g. `M000.001.example-entry.md`)
+- Example entries exist under `.progress/` for each prefix: `M000.001.example-entry.md`, `G000001.example-general-entry.md`, `F000001.example-fix-entry.md`
 - [AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md) point agents at [.progress/README.md](.progress/README.md)
 
 **Out of scope:** Application code, CI, published packages

@@ -123,7 +123,11 @@ One paragraph: what happened and why.
 
 For General entries, set `milestone: General`. For Fix entries, set `milestone: Fix`. For roadmap work, use the roadmap short form (e.g. `M0 — Bootstrap`).
 
-See [M000.001.example-entry.md](M000.001.example-entry.md) for a filled-in milestone example.
+Filled-in examples:
+
+- [M000.001.example-entry.md](M000.001.example-entry.md) — milestone (`milestone: M0 — Bootstrap`)
+- [G000001.example-general-entry.md](G000001.example-general-entry.md) — general (`milestone: General`)
+- [F000001.example-fix-entry.md](F000001.example-fix-entry.md) — fix (`milestone: Fix`)
 
 ## Relationship to other docs
 

@@ -23,7 +23,7 @@ Optional: add `ROADMAP.md` and reference milestone names in each entry's frontma
 
 ## Example entry
 
-See [.progress/M000.001.example-entry.md](.progress/M000.001.example-entry.md) for a filled-in template.
+See [.progress/](.progress/) for filled-in examples: milestone ([M000.001.example-entry.md](.progress/M000.001.example-entry.md)), general ([G000001.example-general-entry.md](.progress/G000001.example-general-entry.md)), and fix ([F000001.example-fix-entry.md](.progress/F000001.example-fix-entry.md)).
 
 ## License
 
