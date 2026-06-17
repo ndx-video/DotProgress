@@ -15,7 +15,7 @@ Lightweight milestone plan for **your project**. This file defines **what** to b
 **Done when:**
 - [README.md](README.md) explains what Dot Progress is and how to adopt it
 - [.progress/README.md](.progress/README.md) defines naming, immutability, and the YAML frontmatter template
-- Example entries exist under `.progress/` for each prefix: `M000.001.example-entry.md`, `G000001.example-general-entry.md`, `F000001.example-fix-entry.md`
+- Example entries exist under each type subfolder: `milestone/M000.001.example-entry.md`, `general/G000001.example-general-entry.md`, `fixes/F000001.example-fix-entry.md`
 - [AGENTS.md](AGENTS.md) and [CLAUDE.md](CLAUDE.md) point agents at [.progress/README.md](.progress/README.md)
 
 **Out of scope:** Application code, CI, published packages
@@ -53,11 +53,11 @@ At the start of each milestone, bring into context:
 1. This milestone's **Done when** checklist (above)
 2. Latest entries in [.progress/](.progress/) for the current milestone (audit trail; append-only)
 
-When work completes, append a progress file per [.progress/README.md](.progress/README.md):
+When work completes, append a progress file per [.progress/README.md](.progress/README.md), into the subfolder for its type:
 
-- **Milestone work:** `M000.002.adoption-docs.md` — `M` + three-digit milestone, three-digit per-milestone index
-- **General work:** `G000012.this-is-a-general-change.md` — `G` + six-digit global number
-- **Fixes:** `F000003.fix-login-redirect.md` — `F` + six-digit global number
+- **Milestone work:** `milestone/M000.002.adoption-docs.md` — `M` + three-digit milestone, three-digit per-milestone index
+- **General work:** `general/G000012.this-is-a-general-change.md` — `G` + six-digit global number
+- **Fixes:** `fixes/F000003.fix-login-redirect.md` — `F` + six-digit global number
 
 Never edit prior progress files.
 

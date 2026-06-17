@@ -2,7 +2,19 @@
 
 Immutable audit trail for project work. Record **what happened and why** by **appending** new files — never edit, rename, or delete committed entries.
 
-Tie milestone work to your project's milestones (typically from [ROADMAP.md](../ROADMAP.md) at the repo root, if you use one). Use **General** or **Fix** prefixes for work that is not tied to a roadmap milestone. This folder is **tracked in git**. Do not add `.progress/` to `.gitignore`.
+Tie milestone work to your project's milestones (typically from [ROADMAP.md](../ROADMAP.md) at the repo root, if you use one). Use **General** or **Fix** entries for meaningful work that is not tied to a milestone. This folder is **tracked in git**. Do not add `.progress/` to `.gitignore`.
+
+## Directory layout
+
+Entries are grouped into subfolders **by type** so the log stays easy for humans to browse. `README.md` stays at the `.progress/` root; every entry lives under its type folder.
+
+| Subfolder | Entry type | Prefix |
+|-----------|------------|--------|
+| `.progress/milestone/` | Milestone | `M{milestone}.{index}.` |
+| `.progress/general/` | General | `G{number}.` |
+| `.progress/fixes/` | Fix | `F{number}.` |
+
+Counters are **global per prefix** across the whole log (not per subfolder). An optional agent-harness layer (`.claude/rules/` + `.claude/skills/`) can enforce this automatically — see [Agent integration](#agent-integration).
 
 ## Filename convention (strict)
 
@@ -17,47 +29,47 @@ Choose the prefix that matches the entry type:
 ### Milestone entries
 
 ```
-{milestone}.{index}.{descriptor}.md
+milestone/{milestone}.{index}.{descriptor}.md
 ```
 
 | Segment | Format | Example |
 |---------|--------|---------|
 | `milestone` | `M` + milestone number **zero-padded to three digits** (`M000` = milestone 0, `M001` = milestone 1, …) | `M000`, `M002` |
-| `index` | Three-digit zero-padded sequence **per milestone**, monotonic | `001`, `002`, `013` |
+| `index` | **Three-digit** zero-padded sequence **per milestone**, monotonic | `001`, `002`, `013` |
 | `descriptor` | Lowercase kebab-case summary of **this entry only** | `example-entry` |
 
-**Full example:** `M000.002.websocket-viewport-spec.md`
+**Full example:** `milestone/M000.002.websocket-viewport-spec.md`
 
 > Only the **filename** milestone token is zero-padded. Prose references (e.g. "M0 — Bootstrap", the `milestone` frontmatter field) may use your roadmap's short form.
 
 ### General and Fix entries
 
 ```
-G{number}.{descriptor}.md
-F{number}.{descriptor}.md
+general/G{number}.{descriptor}.md
+fixes/F{number}.{descriptor}.md
 ```
 
 | Segment | Format | Example |
 |---------|--------|---------|
 | `prefix` | `G` for general work; `F` for fixes | `G`, `F` |
-| `number` | Six-digit zero-padded sequence **per prefix**, monotonic | `000001`, `000012` |
+| `number` | **Six-digit** zero-padded sequence **per prefix**, monotonic | `000001`, `000012` |
 | `descriptor` | Lowercase kebab-case summary of **this entry only** | `this-is-a-general-change` |
 
-**Full examples:** `G000012.this-is-a-general-change.md`, `F000003.fix-login-redirect.md`
+**Full examples:** `general/G000012.this-is-a-general-change.md`, `fixes/F000003.fix-login-redirect.md`
 
-> General and Fix entries use a **single** six-digit counter — not the milestone `M` + three-digit index pattern.
+> General and Fix entries use a **single** six-digit counter per prefix — not the milestone `M` + three-digit index pattern.
 
 ### Index rules
 
 **Milestone (`M`):**
 - Each milestone has its **own** counter starting at `001`.
-- Always use the **next** available index for that milestone (scan existing files in `.progress/`).
+- Always use the **next** available index for that milestone (scan existing files in `.progress/milestone/`).
 - Never reuse or renumber an index after a file is committed.
 - Gaps are allowed; do not backfill.
 
 **General (`G`) and Fix (`F`):**
-- Each prefix has its **own** global counter starting at `000001`.
-- Always use the **next** available number for that prefix (scan existing `G*.md` or `F*.md` files in `.progress/`).
+- Each prefix has its **own** global counter starting at `000001` (six-digit zero-padded).
+- Always use the **next** available number for that prefix (scan existing `G*.md` in `.progress/general/` or `F*.md` in `.progress/fixes/`).
 - Never reuse or renumber a number after a file is committed.
 - Gaps are allowed; do not backfill.
 
@@ -75,12 +87,14 @@ F{number}.{descriptor}.md
 | Document a regression as a **new** entry | "Fix" or overwrite a prior entry |
 | Reference earlier entries by filename/link | Consolidate multiple events into one retroactive doc |
 
+> A one-time, maintainer-led **structural migration** of the log itself (e.g. adopting these subfolders) is the only exception — record it as a new entry that explains the move.
+
 ## When to write an entry
 
 Create a progress document at the end of any session that:
 
 - Completes or partially completes roadmap work
-- Changes specs, architecture, or conventions
+- Changes specs, architecture, APIs, or conventions
 - Makes a decision future agents should understand
 - Introduces a regression or reverts direction (say so explicitly)
 
@@ -125,9 +139,9 @@ For General entries, set `milestone: General`. For Fix entries, set `milestone: 
 
 Filled-in examples:
 
-- [M000.001.example-entry.md](M000.001.example-entry.md) — milestone (`milestone: M0 — Bootstrap`)
-- [G000001.example-general-entry.md](G000001.example-general-entry.md) — general (`milestone: General`)
-- [F000001.example-fix-entry.md](F000001.example-fix-entry.md) — fix (`milestone: Fix`)
+- [milestone/M000.001.example-entry.md](milestone/M000.001.example-entry.md) — milestone (`milestone: M0 — Bootstrap`)
+- [general/G000001.example-general-entry.md](general/G000001.example-general-entry.md) — general (`milestone: General`)
+- [fixes/F000001.example-fix-entry.md](fixes/F000001.example-fix-entry.md) — fix (`milestone: Fix`)
 
 ## Relationship to other docs
 
@@ -138,28 +152,39 @@ Filled-in examples:
 
 ## Finding the next number
 
-Before creating a file, list existing entries for the relevant prefix:
+Before creating a file, list existing entries for the relevant prefix in its subfolder:
 
 **Milestone:**
 
 ```bash
-ls .progress/M000.*.md
+ls .progress/milestone/M000.*.md
 ```
 
-Use max(index) + 1. If none exist, start at `001`.
+Use max(index) + 1 (three-digit). If none exist, start at `001`.
 
 **General:**
 
 ```bash
-ls .progress/G*.md
+ls .progress/general/G*.md
 ```
 
-Use max(number) + 1. If none exist, start at `000001`.
+Use max(number) + 1 (six-digit). If none exist, start at `000001`.
 
 **Fix:**
 
 ```bash
-ls .progress/F*.md
+ls .progress/fixes/F*.md
 ```
 
-Use max(number) + 1. If none exist, start at `000001`.
+Use max(number) + 1 (six-digit). If none exist, start at `000001`.
+
+## Agent integration
+
+Dot Progress is agent-native. The optional `.claude/` layer turns this spec into automatic behavior for AI coding agents (Cursor, Claude Code, and compatible harnesses):
+
+| Artifact | Role |
+|----------|------|
+| [`.claude/rules/dotprogress.md`](../.claude/rules/dotprogress.md) | Path-glob rule — loads this convention whenever an agent touches `.progress/**` or `ROADMAP.md` |
+| [`.claude/skills/dotprogress/SKILL.md`](../.claude/skills/dotprogress/SKILL.md) | Skill — the append-an-entry procedure an agent invokes at end of a meaningful session |
+
+Both are generic and copy-paste portable. Adopt them by copying the `.claude/` files alongside `.progress/`; no project-specific edits required.
