@@ -111,18 +111,18 @@ date: YYYY-MM-DD
 milestone: M{n} — {name from ROADMAP} | General | Fix
 related_commits: {hash or uncommitted}
 # Optional, for cross-project R&D analysis:
-# research:
-#   okf_class: {classification}
-#   okf_capability: {capability-tag}
-#   model: {model-slug}
-#   harness: {runtime-or-editor}
-#   skills: [{skill-a}, {skill-b}]
-#   token_count: {integer}
-#   input_tokens: {integer}
-#   output_tokens: {integer}
-#   duration_minutes: {integer}
-#   cost_usd: {number}
-#   run_id: {trace-id}
+# type: {okf-type}
+# okf_class: {classification}
+# okf_capability: {capability-tag}
+# model: {model-slug}
+# harness: {runtime-or-editor}
+# skills: [{skill-a}, {skill-b}]
+# token_count: {integer}
+# input_tokens: {integer}
+# output_tokens: {integer}
+# duration_minutes: {integer}
+# cost_usd: {number}
+# run_id: {trace-id}
 ---
 
 # {title}
@@ -150,29 +150,32 @@ One paragraph: what happened and why.
 
 For General entries, set `milestone: General`. For Fix entries, set `milestone: Fix`. For roadmap work, use the roadmap short form (e.g. `M0 — Bootstrap`).
 
-## Optional research metadata (OKF-aligned)
+## Optional OKF metadata (flat frontmatter)
 
-Use the optional `research` block when you want organization-wide analysis across projects. Keep values short and machine-friendly (snake_case labels, concise IDs, short lists).
+Use optional top-level OKF fields when you want organization-wide analysis across projects. Keep values short and machine-friendly (snake_case labels, concise IDs, short lists).
+
+OKF compliance rule: if any optional OKF fields are present, `type` is required.
 
 ```yaml
-research:
-  okf_class: implementation
-  okf_capability: repo_bootstrap
-  model: gpt-5.3-codex
-  harness: cursor_agent
-  skills: [dotprogress]
-  token_count: 8421
-  input_tokens: 5172
-  output_tokens: 3249
-  duration_minutes: 18
-  cost_usd: 0.12
-  run_id: run_2026_07_07_abc123
+type: progress_entry
+okf_class: implementation
+okf_capability: repo_bootstrap
+model: gpt-5.3-codex
+harness: cursor_agent
+skills: [dotprogress]
+token_count: 8421
+input_tokens: 5172
+output_tokens: 3249
+duration_minutes: 18
+cost_usd: 0.12
+run_id: run_2026_07_07_abc123
 ```
 
 Field dictionary:
 
 | Field | Type | Notes |
 |------|------|-------|
+| `type` | string (required when any optional OKF fields exist) | OKF-aligned entry type label (e.g. `progress_entry`) |
 | `okf_class` | string | High-level work classification for portfolio slicing |
 | `okf_capability` | string | Capability/domain tag (e.g. `retrieval`, `ui_automation`, `infra`) |
 | `model` | string | LLM model slug used for the session |
@@ -187,21 +190,24 @@ Field dictionary:
 
 Validation and privacy guidance:
 
-- All `research.*` fields are optional; never block entry creation if metrics are unavailable.
+- Optional OKF fields are not required. If used, include `type` for OKF compliance.
+- Other optional OKF fields are optional; never block entry creation if metrics are unavailable.
 - Do not guess unavailable values; omit unknown fields instead.
 - Keep metadata concise; do not include full prompts, secrets, or large payloads.
-- Unknown `research` keys are allowed and should be preserved for forward compatibility.
+- Unknown OKF keys are allowed and should be preserved for forward compatibility.
 
 Filled-in examples:
 
 - [milestone/M000.001.example-entry.md](milestone/M000.001.example-entry.md) — milestone (`milestone: M0 — Bootstrap`)
 - [general/G000001.example-general-entry.md](general/G000001.example-general-entry.md) — general (`milestone: General`)
-- [general/G000003.example-research-metadata-entry.md](general/G000003.example-research-metadata-entry.md) — general + optional `research` metadata
+- [general/G000003.example-research-metadata-entry.md](general/G000003.example-research-metadata-entry.md) — general + optional flat OKF metadata
 - [fixes/F000001.example-fix-entry.md](fixes/F000001.example-fix-entry.md) — fix (`milestone: Fix`)
+
+Note: counters are global per prefix across all entries (including non-example files), so example filenames may not always be contiguous.
 
 Migration note:
 
-- Existing entries without `research` remain fully compliant. No backfill is required.
+- Existing entries without optional OKF fields remain fully compliant. No backfill is required.
 
 ## Relationship to other docs
 

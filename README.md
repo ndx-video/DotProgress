@@ -22,7 +22,7 @@ Bootstrap prompt (copy/paste):
 
 | Piece | Purpose |
 |-------|---------|
-| [.progress/README.md](.progress/README.md) | The spec — entry types, naming, immutability, YAML frontmatter template, optional `research` metadata |
+| [.progress/README.md](.progress/README.md) | The spec — entry types, naming, immutability, YAML frontmatter template, optional flat OKF metadata |
 | [.progress/milestone/](.progress/milestone/) | Milestone entries (`M{n}.{index}.*`) — roadmap work |
 | [.progress/general/](.progress/general/) | General entries (`G000001.*`) — meaningful non-milestone work |
 | [.progress/fixes/](.progress/fixes/) | Fix entries (`F000001.*`) — bug fixes and regression repairs |
@@ -43,7 +43,7 @@ Entries are grouped into **type subfolders**; `README.md` stays at the `.progres
 
 Optional: add `ROADMAP.md` and reference milestone names in each entry's frontmatter.
 
-For portfolio-wide R&D analysis, you can also add the optional `research` frontmatter block described in `.progress/README.md` (model, harness, skills, token/cost/duration telemetry).
+For portfolio-wide R&D analysis, you can also add optional flat OKF frontmatter fields described in `.progress/README.md`. For OKF compliance, set `type` at minimum, then add model/harness/skills/token/cost/duration fields when available.
 
 ## No-ambiguity rules
 
@@ -60,8 +60,10 @@ These remove the most common implementation mistakes:
 
 - [.progress/milestone/M000.001.example-entry.md](.progress/milestone/M000.001.example-entry.md) — a Milestone entry
 - [.progress/general/G000001.example-general-entry.md](.progress/general/G000001.example-general-entry.md) — a General entry
-- [.progress/general/G000003.example-research-metadata-entry.md](.progress/general/G000003.example-research-metadata-entry.md) — a General entry with optional `research` metadata
+- [.progress/general/G000003.example-research-metadata-entry.md](.progress/general/G000003.example-research-metadata-entry.md) — a General entry with optional flat OKF metadata
 - [.progress/fixes/F000001.example-fix-entry.md](.progress/fixes/F000001.example-fix-entry.md) — a Fix entry
+
+Counters are global per prefix, so example numbers may be non-contiguous when intermediate numbers are used by non-example progress entries.
 
 ## License
 
