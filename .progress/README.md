@@ -110,6 +110,19 @@ file: {filename}
 date: YYYY-MM-DD
 milestone: M{n} — {name from ROADMAP} | General | Fix
 related_commits: {hash or uncommitted}
+# Optional, for cross-project R&D analysis:
+# research:
+#   okf_class: {classification}
+#   okf_capability: {capability-tag}
+#   model: {model-slug}
+#   harness: {runtime-or-editor}
+#   skills: [{skill-a}, {skill-b}]
+#   token_count: {integer}
+#   input_tokens: {integer}
+#   output_tokens: {integer}
+#   duration_minutes: {integer}
+#   cost_usd: {number}
+#   run_id: {trace-id}
 ---
 
 # {title}
@@ -137,11 +150,58 @@ One paragraph: what happened and why.
 
 For General entries, set `milestone: General`. For Fix entries, set `milestone: Fix`. For roadmap work, use the roadmap short form (e.g. `M0 — Bootstrap`).
 
+## Optional research metadata (OKF-aligned)
+
+Use the optional `research` block when you want organization-wide analysis across projects. Keep values short and machine-friendly (snake_case labels, concise IDs, short lists).
+
+```yaml
+research:
+  okf_class: implementation
+  okf_capability: repo_bootstrap
+  model: gpt-5.3-codex
+  harness: cursor_agent
+  skills: [dotprogress]
+  token_count: 8421
+  input_tokens: 5172
+  output_tokens: 3249
+  duration_minutes: 18
+  cost_usd: 0.12
+  run_id: run_2026_07_07_abc123
+```
+
+Field dictionary:
+
+| Field | Type | Notes |
+|------|------|-------|
+| `okf_class` | string | High-level work classification for portfolio slicing |
+| `okf_capability` | string | Capability/domain tag (e.g. `retrieval`, `ui_automation`, `infra`) |
+| `model` | string | LLM model slug used for the session |
+| `harness` | string | Agent runtime/editor (e.g. `cursor_agent`, `claude_code`) |
+| `skills` | list[string] | Short list of skills used; omit when none |
+| `token_count` | integer | Total tokens if available |
+| `input_tokens` | integer | Input/prompt token subtotal, if available |
+| `output_tokens` | integer | Output/completion token subtotal, if available |
+| `duration_minutes` | integer | Approximate session duration |
+| `cost_usd` | number | Approximate run cost in USD |
+| `run_id` | string | Trace/session ID for external telemetry joins |
+
+Validation and privacy guidance:
+
+- All `research.*` fields are optional; never block entry creation if metrics are unavailable.
+- Do not guess unavailable values; omit unknown fields instead.
+- Keep metadata concise; do not include full prompts, secrets, or large payloads.
+- Unknown `research` keys are allowed and should be preserved for forward compatibility.
+
 Filled-in examples:
 
 - [milestone/M000.001.example-entry.md](milestone/M000.001.example-entry.md) — milestone (`milestone: M0 — Bootstrap`)
 - [general/G000001.example-general-entry.md](general/G000001.example-general-entry.md) — general (`milestone: General`)
+- [general/G000003.example-research-metadata-entry.md](general/G000003.example-research-metadata-entry.md) — general + optional `research` metadata
 - [fixes/F000001.example-fix-entry.md](fixes/F000001.example-fix-entry.md) — fix (`milestone: Fix`)
+
+Migration note:
+
+- Existing entries without `research` remain fully compliant. No backfill is required.
 
 ## Relationship to other docs
 

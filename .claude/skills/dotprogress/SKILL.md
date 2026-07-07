@@ -29,8 +29,10 @@ Entries live in type subfolders; `README.md` stays at the `.progress/` root. Cou
 2. List existing files for that prefix in its subfolder and pick the **next** index (three-digit milestone) or **six-digit** number (`G`/`F`).
 3. Copy the entry template from `.progress/README.md`.
 4. Set `milestone` frontmatter: roadmap short form, `General`, or `Fix`.
-5. Write Summary, Changes, Decisions, Follow-ups, References.
-6. **Never** edit, rename, or delete a committed progress file — add a new entry instead.
+5. If available, include optional `research` metadata (`okf_class`, `okf_capability`, `model`, `harness`, `skills`, token/cost/duration fields, `run_id`) using concise values.
+6. Write Summary, Changes, Decisions, Follow-ups, References.
+7. If research metrics are unavailable, omit those fields rather than guessing values.
+8. **Never** edit, rename, or delete a committed progress file — add a new entry instead.
 
 ## Quick numbering
 

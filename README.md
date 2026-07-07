@@ -22,7 +22,7 @@ Bootstrap prompt (copy/paste):
 
 | Piece | Purpose |
 |-------|---------|
-| [.progress/README.md](.progress/README.md) | The spec — entry types, naming, immutability, YAML frontmatter template |
+| [.progress/README.md](.progress/README.md) | The spec — entry types, naming, immutability, YAML frontmatter template, optional `research` metadata |
 | [.progress/milestone/](.progress/milestone/) | Milestone entries (`M{n}.{index}.*`) — roadmap work |
 | [.progress/general/](.progress/general/) | General entries (`G000001.*`) — meaningful non-milestone work |
 | [.progress/fixes/](.progress/fixes/) | Fix entries (`F000001.*`) — bug fixes and regression repairs |
@@ -43,6 +43,8 @@ Entries are grouped into **type subfolders**; `README.md` stays at the `.progres
 
 Optional: add `ROADMAP.md` and reference milestone names in each entry's frontmatter.
 
+For portfolio-wide R&D analysis, you can also add the optional `research` frontmatter block described in `.progress/README.md` (model, harness, skills, token/cost/duration telemetry).
+
 ## No-ambiguity rules
 
 These remove the most common implementation mistakes:
@@ -58,6 +60,7 @@ These remove the most common implementation mistakes:
 
 - [.progress/milestone/M000.001.example-entry.md](.progress/milestone/M000.001.example-entry.md) — a Milestone entry
 - [.progress/general/G000001.example-general-entry.md](.progress/general/G000001.example-general-entry.md) — a General entry
+- [.progress/general/G000003.example-research-metadata-entry.md](.progress/general/G000003.example-research-metadata-entry.md) — a General entry with optional `research` metadata
 - [.progress/fixes/F000001.example-fix-entry.md](.progress/fixes/F000001.example-fix-entry.md) — a Fix entry
 
 ## License
